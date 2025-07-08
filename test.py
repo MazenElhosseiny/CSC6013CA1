@@ -73,19 +73,41 @@ class LinkedList:
         input("----------------")
 
 def main():
-    mylist = LinkedList()
-    numbers = [76, 88, 11, 34, 56, 91]
-    for num in numbers:
-        mylist.insertBeginning(num)
-    mylist.printList("Print out current status of list")
-    mylist.resetCurrent()
-    place = 0
-    while place < 3:
-        place += 1
-        mylist.nextCurrent()
-    mylist.removeCurrentNext()
-    mylist.insertCurrentNext(23)
-    mylist.printList("Print out removing 3rd next and inserting 23 in its place")
+    numbers = []
+    with open("data.txt", "r") as file:
+        for line in file:
+            numbers.append(int(line.strip()))
+    numbers.sort()
+    L = LinkedList()
+    i = len(numbers)
+    while i > 0:
+        i -= 1
+        L.insertBeginning(numbers[i])
+    L.printList()
+    while True:
+        choice = input("Enter a number to add to the Linked List: ")
+        if not choice:
+            print("No input received.")
+        else:
+            try:
+                choice_int = int(choice)
+                break
+            except ValueError:
+                print("Invalid Input. Please enter integer value.")
+
+    L.resetCurrent()
+    after = L.nextCurrent()
+    while L.getCurrent() is not None:
+        if choice_int == L.getCurrent():
+            ans = L.removeBeginning()
+            print(f"{ans} removed from Linked List2")
+        if choice_int == after.getCurrent():
+            ans = L.removeCurrentNext()
+            print(f"{ans} removed from Linked List")
+        L.nextCurrent()
+        after.nextCurrent()
+    L.printList()
+            
 
 main()
 
