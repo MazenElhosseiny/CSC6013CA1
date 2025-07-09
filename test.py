@@ -85,7 +85,7 @@ def main():
         L.insertBeginning(numbers[i])
     L.printList()
     while True:
-        choice = input("Enter a number to add to the Linked List: ")
+        choice = input("Enter a number to look for in the Linked List: ")
         if not choice:
             print("No input received.")
         else:
@@ -96,17 +96,16 @@ def main():
                 print("Invalid Input. Please enter integer value.")
 
     L.resetCurrent()
-    after = L.nextCurrent()
     while L.getCurrent() is not None:
-        if choice_int == L.getCurrent():
+        if L.getCurrent() == choice_int:
             ans = L.removeBeginning()
-            print(f"{ans} removed from Linked List2")
-        if choice_int == after.getCurrent():
+            print(f"{ans} removed from the head of the Linked List")
+        if L.Current.Next is not None and L.Current.Next.Data == choice_int:
             ans = L.removeCurrentNext()
-            print(f"{ans} removed from Linked List")
+            print(f"{ans} removed from the Linked List")
+            L.printList()
         L.nextCurrent()
-        after.nextCurrent()
-    L.printList()
+
             
 
 main()
